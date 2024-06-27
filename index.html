@@ -28,7 +28,7 @@
             <div></div>
         </div>
         <div class="check-class">
-            &nbsp;&nbsp;Start From &nbsp;<select id="class-choose" onclick="classChange()">
+            &nbsp;&nbsp;Start From &nbsp;<select id="class-choose" onchange="classChange(event)">
                 <option value="101">101</option>
                 <option value="201">201</option>
                 <option value="301">301</option>
@@ -64,9 +64,9 @@
                 <div id="name-plate"></div><br>
             </div>
             <div class="container">
-                <!-- <button class="btn" id="previus-btn" title="left Arrow  ←">
-                <span class="btn-internal">Previous </span><span class="arrows">⬅</span>
-            </button> -->
+                <button class="btn" id="repeat-btn" title="left Arrow  ←">
+                <span class="btn-internal">Repeat </span><span class="arrows">⬅</span>
+            </button>
                 <button class="btn" id="absent-btn" title="Up Arrow  ↑">
                     <span class="btn-internal">Absent </span><span class="arrows">⬆</span>
                 </button>

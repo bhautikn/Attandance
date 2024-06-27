@@ -12,7 +12,8 @@ let Students = [
 // fetch('student.json').then(res=>res.json()).then((res=>{Students = res}));
 let rollDisplay = document.getElementById('roll-no');
 let nextBtn = document.getElementById('next-btn');
-let previusBtn = document.getElementById('previus-btn');
+// let previusBtn = document.getElementById('previus-btn');
+let repeatBtn = document.getElementById('repeat-btn');
 let absentBtn = document.getElementById('absent-btn');
 // let digits = document.getElementsByClassName('number');
 let absentRolls = document.getElementById('absent-roll');
@@ -62,7 +63,7 @@ if (!localStorage.siteObj) {
 
 document.body.addEventListener('keyup', (e) => {
     if (e.key == 'ArrowRight') increaseRoll();
-    else if (e.key == 'ArrowLeft') previus();
+    else if (e.key == 'ArrowLeft') speekRollNumber(roll);
     else if (e.key == 'ArrowDown' || e.key == 'ArrowUp') addAbsent();
 })
 speechSynthesis.addEventListener("voiceschanged", () => {
@@ -81,7 +82,9 @@ voiceSelectOption.addEventListener('click', (e) => {
     addToLocalStorage({ voice: classIndex });
 })
 nextBtn.addEventListener('click', () => { increaseRoll() })
-// previusBtn.addEventListener('click', ()=>{previus()})
+repeatBtn.addEventListener('click', ()=>{
+    speekRollNumber(roll);
+})
 absentBtn.addEventListener('click', addAbsent);
 
 function showSpeakerMenu(e) {
@@ -215,7 +218,7 @@ function increaseRoll(p = 2, index = 1) {
     speekRollNumber(roll);
 }
 
-function speekRollNumber(rollNumber) {
+function    speekRollNumber(rollNumber) {
     if (isAudio) {
         if (rollNumber % 100 == 0) speaker.text = rollNumber
         else if (rollNumber % 100 == 1) speaker.text = rollNumber
@@ -286,8 +289,10 @@ function lightTheme(r) {
     r.style.setProperty('--hover-color', '#ddd')
     addToLocalStorage({ isDark: false });
 }
-function classChange() {
-    let temp = parseInt(document.getElementById('class-choose').value);
+function classChange(e) {
+    let temp = parseInt(e.target.value);
+    e.target.blur();
+    // let temp = 301;
     // let classIndex = temp.selectedIndex.value;
     outString = "";
     roll = temp;
