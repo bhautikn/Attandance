@@ -28,7 +28,9 @@
             <div></div>
         </div>
         <div class="check-class">
-            &nbsp;&nbsp;Start From &nbsp;<select id="class-choose" onchange="classChange(event)">
+            <span class="option-heading">&nbsp;Start From</span>
+            
+            <select id="class-choose" onchange="classChange(event)">
                 <option value="101">101</option>
                 <option value="201">201</option>
                 <option value="301">301</option>
@@ -36,11 +38,13 @@
                 <option value="501">501</option>
             </select>
         </div>
-        <div class='toggle-switch'>
-            <label>
-                <input type='checkbox' id="change-theme">
-                <span class='slider'></span>
-            </label>
+        <div class="theme-switch">
+            <div class='toggle-switch'>
+                <label>
+                    <input type='checkbox' id="change-theme">
+                    <span class='slider'></span>
+                </label>
+            </div>
         </div>
     </nav>
     <!-- End Nav Bar -->
@@ -48,7 +52,7 @@
     <div style="clear: both;"></div>
 
     <!-- RollNumber Div Start-->
-    <hr>
+    <!-- <hr> -->
     <div class="top-container">
         <div class="main-container">
             <div class="left-container">

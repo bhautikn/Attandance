@@ -9,6 +9,7 @@
     --light-bg-color: whitesmoke;
     --btn-bg-hover-color:  rgb(40, 121, 75);
     --hover-color: #ddd;
+    --nav-bar-color: rgb(218, 236, 241);
 }
 body{
     background-color: var(--back-color);
@@ -94,6 +95,13 @@ textarea{
 }
 nav{
     padding: 10px;
+    display: flex;
+    background-color: var(--nav-bar-color);
+    box-shadow: 0px 0px 20px black;
+}
+.theme-switch{
+    width: max-content;
+    margin-left: auto;
 }
 #speaker-div{
     padding: 10px 10px 5px 10px;
@@ -220,10 +228,10 @@ nav{
 }
 /******* toggele switvh css *******/
 .toggle-switch {
-    padding: 7px 0;
+    padding: 8px 0;
     position: relative;
     width: 66.6px;
-    float: right;
+    /* float: right; */
 }
 
 label {
@@ -291,5 +299,8 @@ input:checked ~ .slider::before {
     }
     .btn{
         font-size: 1em;
+    }
+    .option-heading{
+        display: none;
     }
 }

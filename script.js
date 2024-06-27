@@ -280,6 +280,7 @@ function darkTheme(r) {
     r.style.setProperty('--txt-color', 'white')
     r.style.setProperty('--light-bg-color', '#333')
     r.style.setProperty('--hover-color', '#333')
+    r.style.setProperty('--nav-bar-color', 'rgb(51, 69, 74)')
     addToLocalStorage({ isDark: true });
 }
 function lightTheme(r) {
@@ -287,6 +288,8 @@ function lightTheme(r) {
     r.style.setProperty('--txt-color', '#333')
     r.style.setProperty('--light-bg-color', 'whitesmoke')
     r.style.setProperty('--hover-color', '#ddd')
+    r.style.setProperty('--nav-bar-color', 'rgb(218, 236, 241)')
+
     addToLocalStorage({ isDark: false });
 }
 function classChange(e) {
