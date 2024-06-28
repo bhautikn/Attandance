@@ -88,10 +88,32 @@ body{
 hr{
     color: var(--light-bg-color);
 }
+.text-box-container-right{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+.basic-right-text{
+    width: 100%;
+    padding: 10px;
+}
+.basic-right-text input{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--light-bg-color);
+    box-shadow: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+    color: var(--txt-color);
+}
 textarea{
     background-color: var(--light-bg-color);
     border: 1px solid var(--back-color);
     color: var(--txt-color);
+    font-weight: lighter !important;
+    border-radius: 10px 0 10px 10px;
+    
 }
 nav{
     padding: 10px;

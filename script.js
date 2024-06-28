@@ -28,13 +28,14 @@ let voiceSelectOption = document.getElementById('select-voice');
 let isAudio = true;
 let outString = "";
 let arr = [];
+let absents = [];
 // let roollNumber = [0, 0, 1];
 let roll = 101;
 let speaker = new SpeechSynthesisUtterance();
 
 if (!localStorage.siteObj) {
     addToLocalStorage({
-        isDark: true,
+        // isDark: true,
         isAudio: true,
         speechRate: 1,
         volume: 1,
@@ -44,16 +45,16 @@ if (!localStorage.siteObj) {
 
 {
     isAudio = getToLocalStorage('isAudio');
-    changeTheme.checked = getToLocalStorage('isDark');
+    // changeTheme.checked = getToLocalStorage('isDark');
     if (!isAudio) {
         audioBtn.style.border = '2px solid darkgrey';
         audioBtn.innerHTML = '<svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 9L22 15M22 9L16 15M13 3L7 8H5C3.89543 8 3 8.89543 3 10V14C3 15.1046 3.89543 16 5 16H7L13 21V3Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         audioBtn.firstChild.firstChild.style.stroke = 'darkgrey'
     }
-    if (changeTheme.checked) {
-        let r = document.querySelector(':root');
-        darkTheme(r);
-    }
+    // if (changeTheme.checked) {
+    //     let r = document.querySelector(':root');
+    //     darkTheme(r);
+    // }
     document.getElementById('speech-rate').value = getToLocalStorage('speechRate');
     document.getElementById('volume-changer').value = getToLocalStorage('volume') * 100;
     speaker.rate = getToLocalStorage('speechRate');
@@ -63,7 +64,7 @@ if (!localStorage.siteObj) {
 
 document.body.addEventListener('keyup', (e) => {
     if (e.key == 'ArrowRight') increaseRoll();
-    else if (e.key == 'ArrowLeft') speekRollNumber(roll);
+    else if (e.key == 'ArrowLeft') repeatRoll();
     else if (e.key == 'ArrowDown' || e.key == 'ArrowUp') addAbsent();
 })
 speechSynthesis.addEventListener("voiceschanged", () => {
@@ -83,7 +84,7 @@ voiceSelectOption.addEventListener('click', (e) => {
 })
 nextBtn.addEventListener('click', () => { increaseRoll() })
 repeatBtn.addEventListener('click', ()=>{
-    speekRollNumber(roll);
+    repeatRoll();
 })
 absentBtn.addEventListener('click', addAbsent);
 
@@ -145,13 +146,13 @@ document.getElementById('volume-changer').addEventListener('change', (e) => {
     addToLocalStorage({ volume: speaker.volume });
 })
 
-changeTheme.addEventListener('click', () => {
-    let r = document.querySelector(':root');
-    if (changeTheme.checked)
-        darkTheme(r);
-    else
-        lightTheme(r);
-})
+// changeTheme.addEventListener('click', () => {
+//     let r = document.querySelector(':root');
+//     if (changeTheme.checked)
+//         darkTheme(r);
+//     else
+//         lightTheme(r);
+// })
 
 
 function isDuplicate(arr, e) {
@@ -159,10 +160,15 @@ function isDuplicate(arr, e) {
         if (i === e) return true;
     return false;
 }
+function deleteElement(arr, e) {
+    arr.indexOf(e) != -1 ? arr.splice(arr.indexOf(e), 1) : null;
+    updateTextArea();
+}
 function addAbsent() {
     if (roll >= 570) return;
     // if (!isDuplicate(arr, roll) && roll != 0 && roll%100 != 0){
-    arr.push(roll);
+    // arr.push(roll);
+    absents.push(roll);
     updateTextArea();
     // console.log(arr);
     // }
@@ -218,7 +224,7 @@ function increaseRoll(p = 2, index = 1) {
     speekRollNumber(roll);
 }
 
-function    speekRollNumber(rollNumber) {
+function speekRollNumber(rollNumber) {
     if (isAudio) {
         if (rollNumber % 100 == 0) speaker.text = rollNumber
         else if (rollNumber % 100 == 1) speaker.text = rollNumber
@@ -269,10 +275,43 @@ function    speekRollNumber(rollNumber) {
 // }
 // absentRolls.innerHTML = outString;
 // }
+function repeatRoll(){
+    speaker.text = roll%100;
+    speechSynthesis.speak(speaker);
+}
+function handlePresntRoll(e){
+    if(e.key == 'Enter'){
+        let tempRoll = e.target.value;
+        if(tempRoll.length != 3){
+            return;
+        }
+        e.target.value = "";
+        tempRoll = parseInt(tempRoll);
+        deleteElement(absents, tempRoll);
+        // absents.push(tempRoll);
+        // absents.sort();
+        updateTextArea();
+    }
+}
+function handleAbsentRoll(e){
+    if(e.key == 'Enter'){
+        let tempRoll = e.target.value;
+        if(tempRoll.length != 3){
+            return;
+        }
+        e.target.value = "";
+        tempRoll = parseInt(tempRoll);
+        if(isDuplicate(absents, tempRoll)) return;
+        absents.push(tempRoll);
+        absents.sort();
+        updateTextArea();
+    }
+}
 function updateTextArea() {
-    if (outString[outString.length - 1] == undefined) outString += roll;
-    else if (outString[outString.length - 1] == '\n') outString += roll;
-    else outString += ", " + roll;
+    // if (outString[outString.length - 1] == undefined) outString += roll;
+    // else if (outString[outString.length - 1] == '\n') outString += roll;
+    // else outString += ", " + roll;
+    outString = absents.join(', ');
     absentRolls.value = outString;
 }
 function darkTheme(r) {
