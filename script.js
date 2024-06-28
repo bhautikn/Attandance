@@ -273,7 +273,7 @@ function updateTextArea() {
     if (outString[outString.length - 1] == undefined) outString += roll;
     else if (outString[outString.length - 1] == '\n') outString += roll;
     else outString += ", " + roll;
-    absentRolls.innerHTML = outString;
+    absentRolls.value = outString;
 }
 function darkTheme(r) {
     r.style.setProperty('--back-color', '#222')
