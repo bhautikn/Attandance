@@ -7,7 +7,7 @@
     --back-color: white;
     --btn-bg-color: seagreen;
     --light-bg-color: whitesmoke;
-    --btn-bg-hover-color:  rgb(40, 121, 75);
+    --btn-bg-hover-color:  rgb(23, 23, 255);
     --hover-color: #ddd;
     --nav-bar-color: rgb(218, 236, 241);
 }
@@ -53,9 +53,17 @@ body{
     padding: 0;
     border: none;
     color: white;
-    background-color: var(--btn-bg-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* font-weight: lighter; */
+    /* background-color: var(--btn-bg-color); */
+    background: blue;
     margin: 10px 5px;
     font-size: 1.5em;
+    border-radius: 5px;
+    padding: 7px 10px;
+    width: 33% !important;
+    display: flex;
+    align-items: center;
     user-select: none;
 }
 .btn:hover{
@@ -202,7 +210,7 @@ nav{
     z-index: 100;
     background-color: smokewhite;
     width: fit-content;
-    box-shadow: 2px 2px 15px var(--back-bg-color);
+    box-shadow: 2px 5px 20px black;
     padding: 10px;
     border-radius: 5px;
     position: absolute;
